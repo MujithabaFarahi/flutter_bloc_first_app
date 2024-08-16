@@ -24,6 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: [
           IconButton(
               icon: const Icon(Icons.settings),
+              color: Colors.black,
               onPressed: () => Navigator.pushNamed(context, '/settings')),
         ],
       ),
@@ -32,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             BlocBuilder<InternetCubit, InternetState>(
-              builder: (context, state) {
+              builder: (internetCubitBuilderContext, state) {
                 if (state is InternetConnected &&
                     state.connectionType == ConnectionType.wifi) {
                   return const Text("WIFI");
@@ -42,11 +43,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 } else if (state is InternetDisconnected) {
                   return const Text("Disconnected");
                 }
-                return const CircularProgressIndicator();
+                // return const CircularProgressIndicator();
+                return const Text("NOOOOO :");
               },
             ),
-            const Divider(
-              height: 5,
+            const SizedBox(
+              height: 24,
             ),
             BlocConsumer<CounterCubit, CounterState>(
               listener: (context, state) {
@@ -136,6 +138,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     BlocProvider.of<CounterCubit>(context).decrement();
                     // context.bloc<CounterCubit>().decrement();
                   },
+                  backgroundColor: widget.color,
                   tooltip: 'Decrement',
                   child: const Icon(Icons.remove),
                 ),
@@ -144,6 +147,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     // BlocProvider.of<CounterCubit>(context).increment();
                     context.read<CounterCubit>().increment();
                   },
+                  backgroundColor: widget.color,
                   tooltip: 'Increment',
                   child: const Icon(Icons.add),
                 ),
@@ -166,7 +170,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 },
               ),
             ),
-            // SizedBox(
+            // const SizedBox(
             //   height: 24,
             // ),
             MaterialButton(

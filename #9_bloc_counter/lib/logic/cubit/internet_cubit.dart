@@ -16,17 +16,17 @@ class InternetCubit extends Cubit<InternetState> {
   StreamSubscription monitorInternetConnection() {
     return connectivity.onConnectivityChanged.listen((connectivityResult) {
       if (connectivityResult == ConnectivityResult.wifi) {
-        emitInternetConnected(ConnectionType.wifi);
+        emitInternetConnected(ConnectionType.Wifi);
       } else if (connectivityResult == ConnectivityResult.mobile) {
-        emitInternetConnected(ConnectionType.mobile);
+        emitInternetConnected(ConnectionType.Mobile);
       } else if (connectivityResult == ConnectivityResult.none) {
         emitInternetDisconnected();
       }
     });
   }
 
-  void emitInternetConnected(ConnectionType connectionType) =>
-      emit(InternetConnected(connectionType: connectionType));
+  void emitInternetConnected(ConnectionType connectionType_) =>
+      emit(InternetConnected(connectionType: connectionType_));
 
   void emitInternetDisconnected() => emit(InternetDisconnected());
 

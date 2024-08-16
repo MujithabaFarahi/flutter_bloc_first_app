@@ -34,10 +34,10 @@ class _HomeScreenState extends State<HomeScreen> {
             BlocBuilder<InternetCubit, InternetState>(
               builder: (context, state) {
                 if (state is InternetConnected &&
-                    state.connectionType == ConnectionType.wifi) {
+                    state.connectionType == ConnectionType.Mobile) {
                   return const Text("WIFI");
                 } else if (state is InternetConnected &&
-                    state.connectionType == ConnectionType.mobile) {
+                    state.connectionType == ConnectionType.Wifi) {
                   return const Text("Mobile");
                 } else if (state is InternetDisconnected) {
                   return const Text("Disconnected");
@@ -93,13 +93,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 final internetState = context.watch<InternetCubit>().state;
 
                 if (internetState is InternetConnected &&
-                    internetState.connectionType == ConnectionType.mobile) {
+                    internetState.connectionType == ConnectionType.Mobile) {
                   return Text(
                     'Counter: ${counterState.counterValue} Internet: Mobile',
                     style: Theme.of(context).textTheme.headlineSmall,
                   );
                 } else if (internetState is InternetConnected &&
-                    internetState.connectionType == ConnectionType.wifi) {
+                    internetState.connectionType == ConnectionType.Wifi) {
                   return Text(
                     'Counter: ${counterState.counterValue} Internet: Wifi',
                     style: Theme.of(context).textTheme.headlineSmall,
